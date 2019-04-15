@@ -52,10 +52,10 @@ void panel_utils_port_str(char *tempstr, int port) {
     switch(port) {
         case MIDI_PORT_DIN1_IN:
         case MIDI_PORT_DIN1_OUT:
-            sprintf(tempstr, "MIDI DIN1");
+            sprintf(tempstr, "DIN1 mio4");
             break;
         case MIDI_PORT_DIN2_OUT:
-            sprintf(tempstr, "MIDI DIN2");
+            sprintf(tempstr, "DIN2 FX");
             break;
         case MIDI_PORT_USB_DEV_IN1:
         case MIDI_PORT_USB_DEV_OUT1:
@@ -66,7 +66,7 @@ void panel_utils_port_str(char *tempstr, int port) {
             break;
         case MIDI_PORT_USB_HOST_IN:
         case MIDI_PORT_USB_HOST_OUT:
-            sprintf(tempstr, "MIDI USB HOST");
+            sprintf(tempstr, "Surface");
             break;
         default:
             panel_utils_get_blank_str(tempstr);
@@ -79,12 +79,36 @@ void panel_utils_channel_str(char *tempstr, int port, int channel) {
     switch(port) {
         case MIDI_PORT_DIN1_IN:
         case MIDI_PORT_DIN1_OUT:
-        case MIDI_PORT_DIN2_OUT:
         case MIDI_PORT_USB_DEV_IN1:
         case MIDI_PORT_USB_DEV_OUT1:
         case MIDI_PORT_USB_HOST_IN:
         case MIDI_PORT_USB_HOST_OUT:
             sprintf(tempstr, "CH %d", (channel + 1));
+            break;
+        case MIDI_PORT_DIN2_OUT:
+            switch(channel) {
+                case 0:
+                    sprintf(tempstr, "1: Dark World");
+                    break;
+                case 1:
+                    sprintf(tempstr, "2: Thermae");
+                    break;
+                case 2:
+                    sprintf(tempstr, "3: Heat");
+                    break;
+                case 3:
+                    sprintf(tempstr, "4: Big Sky");
+                    break;
+                case 4:
+                    sprintf(tempstr, "5: Ottobit");
+                    break;
+                case 5:
+                    sprintf(tempstr, "6: Polymoon");
+                    break;
+                default:
+                    sprintf(tempstr, "CH %d", (channel + 1));
+                    break;
+            }
             break;
         case MIDI_PORT_CV_OUT:
             switch(channel) {
