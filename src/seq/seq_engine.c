@@ -41,6 +41,7 @@
 #include "../util/state_change.h"
 #include "../util/state_change_events.h"
 #include <limits.h>
+#include <stdlib.h>
 
 // internal settings
 #define SEQ_ENGINE_MAX_NOTES 16  // active notes per track
@@ -148,6 +149,7 @@ void seq_engine_song_loaded(int song);
 void seq_engine_recalc_params(void);
 int seq_engine_is_first_step(int track);
 int seq_engine_move_to_next_step(int track);
+int seq_engine_compute_next_random_pos(int track, int *pos);
 int seq_engine_compute_next_pos(int track, int *pos, int change);
 int seq_engine_change_scene_synced(void);
 void seq_engine_cancel_pending_scene_change(void);
@@ -1959,13 +1961,25 @@ int seq_engine_is_first_step(int track) {
 int seq_engine_move_to_next_step(int track) {
     // backwards
     if(sestate.dir_reverse[track]) {
-        return seq_engine_compute_next_pos(track,
-            &sestate.step_pos[track], -1);
+        return seq_engine_compute_next_random_pos(track, &sestate.step_pos[track]);
+        /* return seq_engine_compute_next_pos(track, */
+        /*     &sestate.step_pos[track], -1); */
     }
     // forwards
     return seq_engine_compute_next_pos(track,
         &sestate.step_pos[track], 1);
 }
+
+
+int seq_engine_compute_next_random_pos(int track, int *pos) {
+    int curpos = sestate.step_pos[track];
+    int newpos = (rand() % sestate.motion_len[track]) + sestate.motion_start[track];
+    if (newpos > 63)
+        newpos = newpos - 64;
+    *pos = newpos;
+    return curpos == newpos;  // didn't wrap
+}
+
 
 // compute the position of the next step and return it - handling wrapping
 // returns 1 if the position wrapped around to the start/end
