@@ -275,10 +275,10 @@ void step_edit_adjust_note(int change, int shift) {
 void step_edit_adjust_velocity(int change, int shift) {
     sedits.edit_timeout = panel_menu_get_timeout();
     if(sedits.event_pos == STEP_EDIT_EVENT_POS_ALL) {
-        step_edit_adjust_step(change << 1, STEP_EDIT_ADJUST_VELO, 0, shift);
+        step_edit_adjust_step(change, STEP_EDIT_ADJUST_VELO, 0, shift);
     }
     else {
-        step_edit_adjust_step(change << 1, STEP_EDIT_ADJUST_VELO, 1, shift);
+        step_edit_adjust_step(change, STEP_EDIT_ADJUST_VELO, 1, shift);
     }
 }
 
@@ -596,10 +596,14 @@ void step_edit_update_display(void) {
                 }
                 break;
             case SONG_EVENT_CC:
-                gui_set_status_text_part(1, xpos, 4, "CC");
+                sprintf(tempstr, "CC ");
+                panel_utils_cc_names_upper(tempstr, sedits.track, event.data0);
+                gui_set_status_text_part(1, xpos, 4, tempstr);
                 sprintf(tempstr, "%-3d", event.data0);
+                panel_utils_cc_names_lower(tempstr, sedits.track, event.data0);
                 gui_set_status_text_part(2, xpos, 4, tempstr);
                 sprintf(tempstr, "%-3d", event.data1);
+                panel_utils_cc_names_value(tempstr, sedits.track, event.data0, event.data1);
                 gui_set_status_text_part(3, xpos, 4, tempstr);
                 break;
             default:  // blank slot
