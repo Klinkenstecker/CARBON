@@ -45,6 +45,9 @@ void panel_utils_note_to_name(char *tempstr, int note,
 // convert a key split setting to a string
 void panel_utils_key_split_str(char *tempstr, int key_split);
 
+// convert the reverse play mode to a string
+void panel_utils_random_reverse_str(char *tempstr, int mode);
+
 // convert a step length to a string
 void panel_utils_step_len_to_str(char *tempstr, int speed);
 

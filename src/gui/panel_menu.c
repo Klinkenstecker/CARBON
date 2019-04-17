@@ -400,6 +400,13 @@ void panel_menu_handle_state_change(int event_type, int *data, int data_len) {
                 pmstate.menu_timeout_count = pmstate.menu_timeout;
             }
             break;
+        case SCE_SONG_REVERSE_MODE:
+            if(pmstate.menu_mode == PANEL_MENU_MIDI &&
+                    pmstate.menu_submode == PANEL_MENU_MIDI_DIR_RANDOM) {
+                panel_menu_update_display();
+                pmstate.menu_timeout_count = pmstate.menu_timeout;
+            }
+            break;
         case SCE_SONG_KEY_VELOCITY_SCALE:
             if(pmstate.menu_mode == PANEL_MENU_MIDI &&
                     pmstate.menu_submode == PANEL_MENU_MIDI_KEY_VELOCITY) {
@@ -865,6 +872,14 @@ void panel_menu_display_midi(void) {
             panel_utils_key_split_str(tempstr, song_get_key_split(track));
             gui_set_menu_value(tempstr);
             break;
+        case PANEL_MENU_MIDI_DIR_RANDOM:
+            sprintf(tempstr, "Track %d", (track + 1));
+            gui_set_menu_subtitle(tempstr);
+            gui_set_menu_param("Reverse Mode");
+            sprintf(tempstr, "---");
+            panel_utils_random_reverse_str(tempstr, song_get_random_reverse(track));
+            gui_set_menu_value(tempstr);
+            break;
         case PANEL_MENU_MIDI_KEY_VELOCITY:
             gui_set_menu_param("Key Vel Scale");
             gui_set_menu_subtitle("");
@@ -1204,6 +1219,9 @@ void panel_menu_edit_midi(int change) {
             break;
         case PANEL_MENU_MIDI_KEY_SPLIT:
             seq_ctrl_adjust_key_split(change);
+            break;
+        case PANEL_MENU_MIDI_DIR_RANDOM:
+            seq_ctrl_adjust_dir_random(change);
             break;
         case PANEL_MENU_MIDI_KEY_VELOCITY:
             seq_ctrl_adjust_key_velocity_scale(change);

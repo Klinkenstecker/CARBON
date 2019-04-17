@@ -60,6 +60,9 @@
 #define SONG_KEY_SPLIT_OFF 0  // notes will play with any key
 #define SONG_KEY_SPLIT_LEFT 1  // notes will play for left hand
 #define SONG_KEY_SPLIT_RIGHT 2  // notes will play for right hand
+// reverse mode
+#define SONG_REVERSE_MODE_REVERSE 0  // normal reverse mode
+#define SONG_REVERSE_MODE_RANDOM 1  // select random events in reverse mode
 // metronome modes
 #define SONG_METRONOME_OFF 0  // metronome off
 #define SONG_METRONOME_INTERNAL 1  // internal speaker
@@ -296,8 +299,14 @@ void song_set_midi_channel_map(int track, int mapnum, int channel);
 // get the MIDI input key split mode
 int song_get_key_split(int track);
 
+// get the reverse play mode
+int song_get_random_reverse(int track);
+
 // set the MIDI input key split mode
 void song_set_key_split(int track, int mode);
+
+// set the play mode for the reverse direction
+void song_set_random_reverse(int track, int mode);
 
 // get the track type - returns -1 on error
 int song_get_track_type(int track);

@@ -813,6 +813,19 @@ void seq_ctrl_adjust_key_split(int change) {
     }
 }
 
+// adjust the key split on the input
+void seq_ctrl_adjust_dir_random(int change) {
+    int track;
+    for(track = 0; track < SEQ_NUM_TRACKS; track ++) {
+        if(seq_ctrl_get_track_select(track)) {
+            song_set_random_reverse(track,
+                seq_utils_clamp(song_get_random_reverse(track) + change,
+                SONG_REVERSE_MODE_REVERSE, SONG_REVERSE_MODE_RANDOM));
+        }
+    }
+}
+
+
 // adjust the track type of selected tracks
 void seq_ctrl_adjust_track_type(int change) {
     int track;
@@ -1458,6 +1471,12 @@ void seq_ctrl_refresh_modules(void) {
         song_set_scene_sync(SONG_SCENE_SYNC_BEAT);
         song_set_magic_range(12);
         song_set_magic_chance(100);
+    }
+    // song version <= 1.20
+    if(song_ver <= 0x00010014) {
+        for(track = 0; track < SEQ_NUM_TRACKS; track ++) {
+            song_set_random_reverse(track, SONG_REVERSE_MODE_REVERSE);
+        }
     }
 
     // make sure we save back the current version

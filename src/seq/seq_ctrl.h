@@ -215,6 +215,9 @@ void seq_ctrl_adjust_midi_channel(int mapnum, int change);
 // adjust the key split on selected tracks
 void seq_ctrl_adjust_key_split(int change);
 
+// adjust the reverse play mode  on selected tracks
+void seq_ctrl_adjust_dir_random(int change);
+
 // adjust the track type of selected tracks
 void seq_ctrl_adjust_track_type(int change);
 

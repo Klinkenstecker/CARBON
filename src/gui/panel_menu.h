@@ -69,7 +69,7 @@
 #define PANEL_MENU_SAVE_SAVE_CONFIRM 1  // not selectable - used when saving
 #define PANEL_MENU_SAVE_SAVE_ERROR 2  // not selectable - used when saving
 // MIDI
-#define PANEL_MENU_MIDI_NUM_SUBMODES 10
+#define PANEL_MENU_MIDI_NUM_SUBMODES 11
 #define PANEL_MENU_MIDI_PROGRAM_A 0  // per track
 #define PANEL_MENU_MIDI_PROGRAM_B 1  // per track
 #define PANEL_MENU_MIDI_TRACK_OUTA_PORT 2  // per track
@@ -77,9 +77,10 @@
 #define PANEL_MENU_MIDI_TRACK_OUTA_CHAN 4  // per track
 #define PANEL_MENU_MIDI_TRACK_OUTB_CHAN 5  // per track
 #define PANEL_MENU_MIDI_KEY_SPLIT 6  // per track
-#define PANEL_MENU_MIDI_KEY_VELOCITY 7  // per song
-#define PANEL_MENU_MIDI_REMOTE_CTRL 8  // per song
-#define PANEL_MENU_MIDI_AUTOLIVE 9  // per song
+#define PANEL_MENU_MIDI_DIR_RANDOM 7
+#define PANEL_MENU_MIDI_KEY_VELOCITY 8  // per song
+#define PANEL_MENU_MIDI_REMOTE_CTRL 9  // per song
+#define PANEL_MENU_MIDI_AUTOLIVE 10  // per song
 // sys
 #define PANEL_MENU_SYS_NUM_SUBMODES 20
 #define PANEL_MENU_SYS_VERSION 0  // global
