@@ -281,6 +281,9 @@ int song_get_midi_program(int track, int mapnum);
 // set the MIDI program for a track output
 void song_set_midi_program(int track, int mapnum, int program);
 
+// resend the current the MIDI program for a track output
+void song_set_midi_program(int track, int mapnum);
+
 // get a MIDI port mapping for a track - returns -2 on error, -1 on unmapped
 int song_get_midi_port_map(int track, int mapnum);
 

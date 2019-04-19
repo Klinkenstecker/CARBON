@@ -670,11 +670,23 @@ void panel_handle_seq_input(int ctrl, int val) {
                 panel_handle_shift_double_tap();  // handle canceling of modes
                 break;
             case PANEL_SW_SONG_MODE:
-                seq_ctrl_toggle_song_mode();
+                if (panel_menu_get_mode() == PANEL_MENU_MIDI) {
+                    int mapnum;
+                    int track;
+                    for(track = 0; track < SEQ_NUM_TRACKS; track ++) {
+                        if(seq_ctrl_get_track_select(track)) {
+                            for (mapnum == 0; mapnum <= SEQ_NUM_TRACK_OUTPUTS; mapnum++) {
+                                song_send_midi_program(track, mapnum);
+                            }
+                        }
+                    }
+                } else {
+                    seq_ctrl_toggle_song_mode();
 #ifdef GFX_REMLCD_MODE
                 // allow screen to be redrawn for client
-                gui_force_refresh();
+                    gui_force_refresh();
 #endif
+                }
                 break;
             case PANEL_ENC_SPEED:
                 switch(panel_get_edit_mode()) {
