@@ -177,6 +177,89 @@ void panel_utils_cc_names_upper(char *tempstr, int track, int cc) {
                     break;
             } 
         } //}
+        if (channel == 1) { //{ Thermae 
+            switch(cc) {
+                case 14:
+                    sprintf(tempstr, "Mix");
+                    break;
+                case 15:
+                    sprintf(tempstr, "LPF");
+                    break;
+                case 16:
+                    sprintf(tempstr, "Reg");
+                    break;
+                case 17:
+                    sprintf(tempstr, "Gli");
+                    break;
+                case 18:
+                    sprintf(tempstr, "1Sp");
+                    break;
+                case 19:
+                    sprintf(tempstr, "2De");
+                    break;
+                case 20:
+                    sprintf(tempstr, "Ram");
+                    break;
+                case 21:
+                case 22:
+                case 23:
+                    sprintf(tempstr, "Tog");
+                    break;
+                case 24:
+                    sprintf(tempstr, "Run");
+                    break;
+                case 25:
+                    sprintf(tempstr, "Slw");
+                    break;
+                case 93:
+                    sprintf(tempstr, "Tap");
+                    break;
+                case 100:
+                    sprintf(tempstr, "Exp");
+                    break;
+                case 102:
+                    sprintf(tempstr, "Byp");
+                    break;
+            } 
+        } //}
+        if (channel == 3) { //{ Big Sky 
+            switch(cc) {
+                case 14:
+                    sprintf(tempstr, "Mod");
+                    break;
+                case 15:
+                    sprintf(tempstr, "Mix");
+                    break;
+                case 9:
+                case 16:
+                    sprintf(tempstr, "Par");
+                    break;
+                case 17:
+                    sprintf(tempstr, "Dec");
+                    break;
+                case 18:
+                    sprintf(tempstr, "Pre");
+                    break;
+                case 19:
+                    sprintf(tempstr, "Typ");
+                    break;
+                case 22:
+                    sprintf(tempstr, "Per");
+                    break;
+                case 54:
+                    sprintf(tempstr, "Mag");
+                    break;
+                case 70:
+                    sprintf(tempstr, "Fre");
+                    break;
+                case 100:
+                    sprintf(tempstr, "Exp");
+                    break;
+                case 102:
+                    sprintf(tempstr, "Byp");
+                    break;
+            } 
+        } //}
         if (channel == 4) { //{ Ottobit
             switch(cc) {
                 case 04:
@@ -220,6 +303,68 @@ void panel_utils_cc_names_upper(char *tempstr, int track, int cc) {
                     break;
             }
         } //}
+        if (channel == 5) { //{ Polymoon
+            switch(cc) {
+                case 04:
+                    sprintf(tempstr, "Exp");
+                    break;
+                case 09:
+                    sprintf(tempstr, "Dot");
+                    break;
+                case 14:
+                    sprintf(tempstr, "Byp");
+                    break;
+                case 15:
+                    sprintf(tempstr, "Tem");
+                    break;
+                case 16:
+                    sprintf(tempstr, "Tim");
+                    break;
+                case 17:
+                    sprintf(tempstr, "Fee");
+                    break;
+                case 18:
+                    sprintf(tempstr, "Mix");
+                    break;
+                case 19:
+                    sprintf(tempstr, "Mul");
+                    break;
+                case 20:
+                    sprintf(tempstr, "Dim");
+                    break;
+                case 21:
+                    sprintf(tempstr, "Dyn");
+                    break;
+                case 22:
+                    sprintf(tempstr, "Ear");
+                    break;
+                case 23:
+                    sprintf(tempstr, "Fbk");
+                    break;
+                case 24:
+                    sprintf(tempstr, "Del");
+                    break;
+                case 25:
+                    sprintf(tempstr, "Lat");
+                    break;
+                case 26:
+                case 27:
+                    sprintf(tempstr, "Fla");
+                    break;
+                case 28:
+                    sprintf(tempstr, "Tap");
+                    break;
+                case 29:
+                    sprintf(tempstr, "Pha");
+                    break;
+                case 30:
+                    sprintf(tempstr, "Fla");
+                    break;
+                case 31:
+                    sprintf(tempstr, "1/2");
+                    break;
+            }
+        } //}
     }
 }
 
@@ -255,6 +400,91 @@ void panel_utils_cc_names_lower(char *tempstr, int track, int cc) {
                     break;
                 case 23:
                     sprintf(tempstr, "Alg");
+                    break;
+                case 100:
+                    sprintf(tempstr, "res");
+                    break;
+                case 102:
+                    sprintf(tempstr, "ass");
+                    break;
+            } 
+        } //}
+        if (channel == 1) { //{ Thermae 
+            switch(cc) {
+                case 14:
+                    sprintf(tempstr, "   ");
+                    break;
+                case 15:
+                    sprintf(tempstr, "   ");
+                    break;
+                case 16:
+                    sprintf(tempstr, "en ");
+                    break;
+                case 17:
+                    sprintf(tempstr, "de ");
+                    break;
+                case 18:
+                    sprintf(tempstr, "eed");
+                    break;
+                case 19:
+                    sprintf(tempstr, "pth");
+                    break;
+                case 20:
+                    sprintf(tempstr, "p");
+                    break;
+                case 21:
+                case 22:
+                case 23:
+                    sprintf(tempstr, "le%d", cc - 20);
+                    break;
+                case 24:
+                    sprintf(tempstr, "awy");
+                    break;
+                case 25:
+                    sprintf(tempstr, "NwT");
+                    break;
+                case 93:
+                    sprintf(tempstr, "Swi");
+                    break;
+                case 100:
+                    sprintf(tempstr, "res");
+                    break;
+                case 102:
+                    sprintf(tempstr, "ass");
+                    break;
+            } 
+        } //}
+        if (channel == 3) { //{ Big Sky 
+            switch(cc) {
+                case 9:
+                    sprintf(tempstr, "am1");
+                    break;
+                case 14:
+                    sprintf(tempstr, "   ");
+                    break;
+                case 15:
+                    sprintf(tempstr, "   ");
+                    break;
+                case 16:
+                    sprintf(tempstr, "am2");
+                    break;
+                case 17:
+                    sprintf(tempstr, "ay");
+                    break;
+                case 18:
+                    sprintf(tempstr, "Del");
+                    break;
+                case 19:
+                    sprintf(tempstr, "e  ");
+                    break;
+                case 22:
+                    sprintf(tempstr, "sis");
+                    break;
+                case 54:
+                    sprintf(tempstr, "Spa");
+                    break;
+                case 70:
+                    sprintf(tempstr, "eze");
                     break;
                 case 100:
                     sprintf(tempstr, "res");
@@ -306,6 +536,70 @@ void panel_utils_cc_names_lower(char *tempstr, int track, int cc) {
                     break;
                 case 31:
                     sprintf(tempstr, "Hld");
+                    break;
+            }
+        } //}
+        if (channel == 5) { //{ Polymoon
+            switch(cc) {
+                case 04:
+                    sprintf(tempstr, "res");
+                    break;
+                case 09:
+                    sprintf(tempstr, "8th");
+                    break;
+                case 14:
+                    sprintf(tempstr, "ass");
+                    break;
+                case 15:
+                    sprintf(tempstr, "po");
+                    break;
+                case 16:
+                    sprintf(tempstr, "e");
+                    break;
+                case 17:
+                    sprintf(tempstr, "dbk");
+                    break;
+                case 18:
+                    sprintf(tempstr, "   ");
+                    break;
+                case 19:
+                    sprintf(tempstr, "ply");
+                    break;
+                case 20:
+                    sprintf(tempstr, "ens");
+                    break;
+                case 21:
+                    sprintf(tempstr, "ics");
+                    break;
+                case 22:
+                    sprintf(tempstr, "Mod");
+                    break;
+                case 23:
+                    sprintf(tempstr, "Fil");
+                    break;
+                case 24:
+                    sprintf(tempstr, "Lvl");
+                    break;
+                case 25:
+                    sprintf(tempstr, "Mod");
+                    break;
+                case 26:
+                    sprintf(tempstr, "Mde");
+                    break;
+                case 27:
+                    sprintf(tempstr, "Spd");
+                    break;
+                case 28:
+                    sprintf(tempstr, "   ");
+                    break;
+                case 29:
+                    sprintf(tempstr, "Mde");
+                    break;
+                case 30:
+                    sprintf(tempstr, "Fbk");
+                    break;
+                case 31:
+                    sprintf(tempstr, "Spd");
                     break;
             }
         } //}
@@ -381,6 +675,87 @@ void panel_utils_cc_names_value(char *tempstr, int track, int cc, int value) {
                     break;
             } 
         } //}
+        if (channel == 1) { //{ Thermae 
+            switch(cc) {
+                case 21:
+                case 22:
+                case 23:
+                    switch(value) {
+                        case 1:
+                            sprintf(tempstr, " R "); // this is adjusted to my view
+                            break;
+                        case 2:
+                            sprintf(tempstr, " M ");
+                            break;
+                        case 3:
+                            sprintf(tempstr, " L ");
+                            break;
+                        default:
+                            sprintf(tempstr, "---");
+                            break;
+                    }
+                    break;
+                case 24:
+                case 25:
+                    switch(value) {
+                        case 0:
+                            sprintf(tempstr, "On");
+                            break;
+                        case 127:
+                            sprintf(tempstr, "Off");
+                            break;
+                        default:
+                            sprintf(tempstr, "---");
+                            break;
+                    }
+                    break;
+                case 102:
+                    switch(value) {
+                        case 0:
+                            sprintf(tempstr, "On");
+                            break;
+                        case 127:
+                            sprintf(tempstr, "Sav");
+                            break;
+                        default:
+                            sprintf(tempstr, "---");
+                            break;
+                    }
+                    break;
+            } 
+        } //}
+        if (channel == 3) { //{ Big Sky 
+            switch(cc) {
+                case 22:
+                case 54:
+                case 70:
+                    switch(value) {
+                        case 0:
+                            sprintf(tempstr, "On");
+                            break;
+                        case 1:
+                            sprintf(tempstr, "Off");
+                            break;
+                        default:
+                            sprintf(tempstr, "---");
+                            break;
+                    }
+                    break;
+                case 102:
+                    switch(value) {
+                        case 0:
+                            sprintf(tempstr, "On");
+                            break;
+                        case 127:
+                            sprintf(tempstr, "Off");
+                            break;
+                        default:
+                            sprintf(tempstr, "---");
+                            break;
+                    }
+                    break;
+            } 
+        } //}
         if (channel == 4) { //{ Ottobit
             switch(cc) {
                 case 14:
@@ -402,6 +777,19 @@ void panel_utils_cc_names_value(char *tempstr, int track, int cc, int value) {
                         sprintf(tempstr, "off");
                     else
                         sprintf(tempstr, "on ");
+                    break;
+            }
+        } //}
+        if (channel == 5) { //{ Polymoon
+            switch(cc) {
+                case 09:
+                case 14:
+                case 30:
+                case 31:
+                    if (value < 64)
+                        sprintf(tempstr, "off");
+                    else
+                        sprintf(tempstr, "on");
                     break;
             }
         } //}
