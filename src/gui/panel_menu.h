@@ -77,7 +77,7 @@
 #define PANEL_MENU_MIDI_TRACK_OUTA_CHAN 4  // per track
 #define PANEL_MENU_MIDI_TRACK_OUTB_CHAN 5  // per track
 #define PANEL_MENU_MIDI_KEY_SPLIT 6  // per track
-#define PANEL_MENU_MIDI_DIR_RANDOM 7
+#define PANEL_MENU_MIDI_ALT_PLAY_DIR 7 // per track, alternative play direction
 #define PANEL_MENU_MIDI_KEY_VELOCITY 8  // per song
 #define PANEL_MENU_MIDI_REMOTE_CTRL 9  // per song
 #define PANEL_MENU_MIDI_AUTOLIVE 10  // per song

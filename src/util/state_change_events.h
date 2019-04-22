@@ -65,7 +65,7 @@ enum STATE_CHANGE_EVENT {
     SCE_SONG_MIDI_PORT_MAP,  // arg0 = track, arg1 = mapnum, arg3 = port
     SCE_SONG_MIDI_CHANNEL_MAP,  // arg0 = track, arg1 = mapnum, arg2 = channel
     SCE_SONG_KEY_SPLIT,  // arg0 = track, arg1 = mode
-    SCE_SONG_REVERSE_MODE,  // arg0 = track, arg1 = mode
+    SCE_SONG_ALT_DIRECTION,  // arg0 = track, arg1 = mode
     SCE_SONG_TRACK_TYPE,  // arg0 = track, arg1 = mode
     SCE_SONG_STEP_LEN,  // arg0 = scene, arg1 = track, arg2 = length
     SCE_SONG_TONALITY,  // arg0 = scene, arg1 = track, arg2 = tonality

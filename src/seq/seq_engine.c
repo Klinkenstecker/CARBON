@@ -1961,7 +1961,7 @@ int seq_engine_is_first_step(int track) {
 int seq_engine_move_to_next_step(int track) {
     // backwards
     if(sestate.dir_reverse[track]) {
-        if (song_get_random_reverse(track))
+        if (song_get_alt_direction(track))
             return seq_engine_compute_next_random_pos(track, &sestate.step_pos[track]);
         else
             return seq_engine_compute_next_pos(track,

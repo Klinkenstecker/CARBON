@@ -282,12 +282,12 @@ void panel_utils_key_split_str(char *tempstr, int key_split) {
 }
 
 // convert the random mode to a string
-void panel_utils_random_reverse_str(char *tempstr, int mode) {
+void panel_utils_alt_direction_str(char *tempstr, int mode) {
     switch(mode) {
-        case SONG_REVERSE_MODE_REVERSE:
+        case SONG_ALT_DIRECTION_BACKWARDS:
             sprintf(tempstr, "Reverse");
             break;
-        case SONG_REVERSE_MODE_RANDOM:
+        case SONG_ALT_DIRECTION_RANDOM:
             sprintf(tempstr, "Random");
             break;
     }

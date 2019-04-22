@@ -128,21 +128,21 @@ struct song_data {
     uint8_t magic_range;  // magic seed range in semitones
     uint8_t magic_chance;  // magic change amount in percent
     // CARBON version 1.21
-    uint8_t reverse_mode[SEQ_NUM_TRACKS];
+    uint8_t alt_direction[SEQ_NUM_TRACKS];
     
 
     // dummy padding - to make it an even number of 4096 byte sectors in the flash
     // - be VERY careful that this is correct or other RAM could be overwritten
 #ifdef SONG_NOTES_PER_SCENE
     uint8_t dummy0[1024];
-    uint8_t dummy1[473];
+    uint8_t dummy1[467];
 #else
     uint8_t dummy0[1024];
     uint8_t dummy1[1024];
     uint8_t dummy2[1024];
     uint8_t dummy3[1024];
     uint8_t dummy4[700];
-    uint8_t dummy5[13];
+    uint8_t dummy5[7];
 #endif
     // token to identify correct loading of file
     uint32_t magic_num;
@@ -270,8 +270,9 @@ void song_clear(void) {
         // disable the second port
         song_set_midi_port_map(track, 1, SONG_PORT_DISABLE);
         song_set_key_split(track, SONG_KEY_SPLIT_OFF);
-        song_set_random_reverse(track, SONG_REVERSE_MODE_REVERSE);
         song_set_track_type(track, SONG_TRACK_TYPE_VOICE);
+        // set the play direction to the fixed behaviour for version < 1.21
+        song_set_alt_direction(track, SONG_ALT_DIRECTION_BACKWARDS);
     }
 
     // track params (per scene)
@@ -1026,27 +1027,27 @@ void song_set_key_split(int track, int mode) {
 }
 
 // get the reverse play mode
-int song_get_random_reverse(int track) {
+int song_get_alt_direction(int track) {
     if(track < 0 || track >= SEQ_NUM_TRACKS) {
         log_error("sgks - track invalid: %d", track);
         return -1;
     }
-    return song.reverse_mode[track];
+    return song.alt_direction[track];
 }
 
 // set the reverse play mode
-void song_set_random_reverse(int track, int mode) {
+void song_set_alt_direction(int track, int mode) {
     if(track < 0 || track >= SEQ_NUM_TRACKS) {
         log_error("ssks - track invalid: %d", track);
         return;
     }
-    if(mode < SONG_REVERSE_MODE_REVERSE || mode > SONG_REVERSE_MODE_RANDOM) {
+    if(mode < 0 || mode > MAX_SONG_ALT_DIRECTION) {
         log_error("ssks - mode invalid: %d", mode);
         return;
     }
-    song.reverse_mode[track] = mode;
+    song.alt_direction[track] = mode;
     // fire event
-    state_change_fire2(SCE_SONG_REVERSE_MODE, track, mode);
+    state_change_fire2(SCE_SONG_ALT_DIRECTION, track, mode);
 }
 
 // get the track type - returns -1 on error
