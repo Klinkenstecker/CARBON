@@ -68,5 +68,8 @@ void step_edit_adjust_ratchet_mode(int change, int shift);
 // clear the current step
 void step_edit_clear_step(void);
 
+// for devices with cc-names, skip not defined cc numbers
+int step_edit_find_next_valid_cc(int actual, int change);
+
 #endif
 
