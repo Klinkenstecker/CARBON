@@ -431,7 +431,7 @@ void step_edit_adjust_step(int change, int mode, int single, int shift) {
                     }
                     // CC
                     else if(event.type == SONG_EVENT_CC) {
-                        event.data0 += change;
+                        //                        event.data0 += change;
                         event.data0 = step_edit_find_next_valid_cc(event.data0, change);
                         // the new value would collide with another slot
                         if(step_edit_does_step_contain_event(SONG_EVENT_CC, event.data0) != -1) {
@@ -459,8 +459,11 @@ void step_edit_adjust_step(int change, int mode, int single, int shift) {
                     }
                     // CC
                     else if(event.type == SONG_EVENT_CC) {
+                        if (shift) {
+                            change = change * 10;
+                        }
                         event.data1 = seq_utils_clamp(event.data1 + change, 0, 127);
-                        inhibit_preview = 1;  // user must retrigger edit to hear
+                        //                        inhibit_preview = 1;  // user must retrigger edit to hear
                     }
                     sedits.last_adjust_type = STEP_EDIT_ADJUST_VELO;
                     // put back modified event
@@ -756,39 +759,115 @@ int step_edit_does_step_contain_event(int type, int data0) {
 }
 
 int step_edit_find_next_valid_cc(int actual, int change) {
-    int8_t port = song_get_midi_port_map(track, 0);
-    int8_t channel = song_get_midi_channel_map(track, 0);
+    int8_t port = song_get_midi_port_map(sedits.track, 0);
+    int8_t channel = song_get_midi_channel_map(sedits.track, 0);
 
     // reduced cc numbers exists only for MIDI_PORT_DIN2
-    int cc_is_not_valid = port == MIDI_PORT_DIN2_OUT;
-    int check_cc = actual + change;
+    int cc_is_not_valid = (port == MIDI_PORT_DIN2_OUT);
+    int check_cc = actual;
 
-    while(cc_is_not_valid) {
-        switch(channel) {
-            case 0: // Dark World
-                switch(check_cc) {
-                    case 14:
-                    case 15:
-                    case 16:
-                    case 17:
-                    case 18:
-                    case 19:
-                    case 21:
-                    case 22:
-                    case 23:
-                    case 100:
-                    case 102:
-                        cc_is_not_valid = 0;
-                    default:
-                        cc_is_not_valid = 1;
-                }
-            default:
-                cc_is_not_valid = 0;
-        }
+    do {
         check_cc = check_cc + change;
-        if ((check_cc > 127) || (check_cc < 0))
-            reurn actual;
-    }
+        
+        if (channel == 0) { //{ Dark World
+            switch(check_cc) {
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                case 21:
+                case 22:
+                case 23:
+                case 100:
+                case 102:
+                    cc_is_not_valid = 0;
+                    break;
+                default:
+                    cc_is_not_valid = 1;
+            } //}
+        } else if (channel == 1) { //{ Thermae
+            switch(check_cc) {
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                case 93:
+                case 100:
+                case 102:
+                    cc_is_not_valid = 0;
+                    break;
+                default:
+                    cc_is_not_valid = 1;
+            } //}
+        } else if (channel == 4) { //{ Ottobit
+            switch(check_cc) {
+                case 4:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                case 26:
+                case 27:
+                case 29:
+                case 31:
+                    cc_is_not_valid = 0;
+                    break;
+                default:
+                    cc_is_not_valid = 1;
+            } //}
+        } else if (channel == 5) { //{ Polymoon
+            switch(check_cc) {
+                case 4:
+                case 9:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                case 26:
+                case 27:
+                case 28:
+                case 29:
+                case 30:
+                case 31:
+                    cc_is_not_valid = 0;
+                    break;
+                default:
+                    cc_is_not_valid = 1;
+            } //}
+        } else {
+            cc_is_not_valid = 0;
+        }
+        if ((check_cc > 127) || (check_cc < 0)) {
+            check_cc = actual;
+            cc_is_not_valid = 0;
+        }
+    } while(cc_is_not_valid);
     
     if (check_cc > 127)
         return 127;

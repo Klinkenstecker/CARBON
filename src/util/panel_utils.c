@@ -59,14 +59,14 @@ void panel_utils_port_str(char *tempstr, int port) {
             break;
         case MIDI_PORT_USB_DEV_IN1:
         case MIDI_PORT_USB_DEV_OUT1:
-            sprintf(tempstr, "MIDI USB DEV");
+            sprintf(tempstr, "Surface");
             break;
         case MIDI_PORT_CV_OUT:
             sprintf(tempstr, "CV/GATE");
             break;
         case MIDI_PORT_USB_HOST_IN:
         case MIDI_PORT_USB_HOST_OUT:
-            sprintf(tempstr, "Surface");
+            sprintf(tempstr, "MIDI USB HOST");
             break;
         default:
             panel_utils_get_blank_str(tempstr);
@@ -262,7 +262,7 @@ void panel_utils_cc_names_upper(char *tempstr, int track, int cc) {
         } //}
         if (channel == 4) { //{ Ottobit
             switch(cc) {
-                case 04:
+                case 4:
                     sprintf(tempstr, "Exp");
                     break;
                 case 14:
@@ -305,10 +305,10 @@ void panel_utils_cc_names_upper(char *tempstr, int track, int cc) {
         } //}
         if (channel == 5) { //{ Polymoon
             switch(cc) {
-                case 04:
+                case 4:
                     sprintf(tempstr, "Exp");
                     break;
-                case 09:
+                case 9:
                     sprintf(tempstr, "Dot");
                     break;
                 case 14:
@@ -541,10 +541,10 @@ void panel_utils_cc_names_lower(char *tempstr, int track, int cc) {
         } //}
         if (channel == 5) { //{ Polymoon
             switch(cc) {
-                case 04:
+                case 4:
                     sprintf(tempstr, "res");
                     break;
-                case 09:
+                case 9:
                     sprintf(tempstr, "8th");
                     break;
                 case 14:
@@ -614,6 +614,9 @@ void panel_utils_cc_names_value(char *tempstr, int track, int cc, int value) {
             switch(cc) {
                 case 21:
                     switch(value) {
+                        case 0:
+                            sprintf(tempstr, "-->");
+                            break;
                         case 1:
                             sprintf(tempstr, "MOD");
                             break;
@@ -624,12 +627,15 @@ void panel_utils_cc_names_value(char *tempstr, int track, int cc, int value) {
                             sprintf(tempstr, "BLA");
                             break;
                         default:
-                            sprintf(tempstr, "---");
+                            sprintf(tempstr, "<--");
                             break;
                     }
                     break;
                 case 22:
                     switch(value) {
+                        case 0:
+                            sprintf(tempstr, "-->");
+                            break;
                         case 1:
                             sprintf(tempstr, "PAR");
                             break;
@@ -640,12 +646,15 @@ void panel_utils_cc_names_value(char *tempstr, int track, int cc, int value) {
                             sprintf(tempstr, "W>D");
                             break;
                         default:
-                            sprintf(tempstr, "---");
+                            sprintf(tempstr, "<--");
                             break;
                     }
                     break;
                 case 23:
                     switch(value) {
+                        case 0:
+                            sprintf(tempstr, "-->");
+                            break;
                         case 1:
                             sprintf(tempstr, "HAL");
                             break;
@@ -656,7 +665,7 @@ void panel_utils_cc_names_value(char *tempstr, int track, int cc, int value) {
                             sprintf(tempstr, "SPR");
                             break;
                         default:
-                            sprintf(tempstr, "---");
+                            sprintf(tempstr, "<--");
                             break;
                     }
                     break;
@@ -669,7 +678,7 @@ void panel_utils_cc_names_value(char *tempstr, int track, int cc, int value) {
                             sprintf(tempstr, "Sav");
                             break;
                         default:
-                            sprintf(tempstr, "---");
+                            sprintf(tempstr, "<->");
                             break;
                     }
                     break;
@@ -681,6 +690,9 @@ void panel_utils_cc_names_value(char *tempstr, int track, int cc, int value) {
                 case 22:
                 case 23:
                     switch(value) {
+                        case 0:
+                            sprintf(tempstr, "-->");
+                            break;
                         case 1:
                             sprintf(tempstr, " R "); // this is adjusted to my view
                             break;
@@ -691,7 +703,7 @@ void panel_utils_cc_names_value(char *tempstr, int track, int cc, int value) {
                             sprintf(tempstr, " L ");
                             break;
                         default:
-                            sprintf(tempstr, "---");
+                            sprintf(tempstr, "<--");
                             break;
                     }
                     break;
@@ -705,7 +717,7 @@ void panel_utils_cc_names_value(char *tempstr, int track, int cc, int value) {
                             sprintf(tempstr, "Off");
                             break;
                         default:
-                            sprintf(tempstr, "---");
+                            sprintf(tempstr, "<->");
                             break;
                     }
                     break;
@@ -718,7 +730,7 @@ void panel_utils_cc_names_value(char *tempstr, int track, int cc, int value) {
                             sprintf(tempstr, "Sav");
                             break;
                         default:
-                            sprintf(tempstr, "---");
+                            sprintf(tempstr, "<->");
                             break;
                     }
                     break;
@@ -737,7 +749,7 @@ void panel_utils_cc_names_value(char *tempstr, int track, int cc, int value) {
                             sprintf(tempstr, "Off");
                             break;
                         default:
-                            sprintf(tempstr, "---");
+                            sprintf(tempstr, "<--");
                             break;
                     }
                     break;
@@ -750,7 +762,7 @@ void panel_utils_cc_names_value(char *tempstr, int track, int cc, int value) {
                             sprintf(tempstr, "Off");
                             break;
                         default:
-                            sprintf(tempstr, "---");
+                            sprintf(tempstr, "<->");
                             break;
                     }
                     break;
@@ -782,7 +794,7 @@ void panel_utils_cc_names_value(char *tempstr, int track, int cc, int value) {
         } //}
         if (channel == 5) { //{ Polymoon
             switch(cc) {
-                case 09:
+                case 9:
                 case 14:
                 case 30:
                 case 31:
