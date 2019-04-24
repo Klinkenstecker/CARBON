@@ -676,6 +676,17 @@ void panel_handle_seq_input(int ctrl, int val) {
                     } else {
                         step_edit_copy_marked_step();
                     }
+                }
+                if (panel_menu_get_mode() == PANEL_MENU_MIDI) {
+                    int mapnum;
+                    int track;
+                    for(track = 0; track < SEQ_NUM_TRACKS; track ++) {
+                        if(seq_ctrl_get_track_select(track)) {
+                            for (mapnum = 0; mapnum <= SEQ_NUM_TRACK_OUTPUTS; mapnum++) {
+                                song_send_current_midi_program(track, mapnum);
+                            }
+                        }
+                    }
                 } else {
                     seq_ctrl_toggle_song_mode();
 #ifdef GFX_REMLCD_MODE

@@ -933,6 +933,11 @@ void song_set_midi_program(int track, int mapnum, int program) {
     state_change_fire3(SCE_SONG_MIDI_PROGRAM, track, mapnum, program);
 }
 
+// resend the current the MIDI program for a track output
+void song_send_current_midi_program(int track, int mapnum) {
+    song_set_midi_program(track, mapnum, song.trkparam[track].midi_program[mapnum]);
+}
+
 // get a MIDI port mapping for a track - returns -2 on error, -1 on unmapped
 int song_get_midi_port_map(int track, int mapnum) {
     if(track < 0 || track >= SEQ_NUM_TRACKS) {
