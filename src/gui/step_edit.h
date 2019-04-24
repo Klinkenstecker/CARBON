@@ -74,5 +74,7 @@ void step_edit_mark_step_for_copying(void);
 // copy the event from copy_from_scene, copy_from_track, copy_from_pos
 void step_edit_copy_marked_step(void);
 
+// for devices with cc-names, skip not defined cc numbers
+int step_edit_find_next_valid_cc(int actual, int change);
 #endif
 

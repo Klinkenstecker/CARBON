@@ -71,10 +71,10 @@
 // MIDI
 #define PANEL_MENU_MIDI_NUM_SUBMODES 10
 #define PANEL_MENU_MIDI_PROGRAM_A 0  // per track
-#define PANEL_MENU_MIDI_PROGRAM_B 1  // per track
-#define PANEL_MENU_MIDI_TRACK_OUTA_PORT 2  // per track
-#define PANEL_MENU_MIDI_TRACK_OUTB_PORT 3  // per tracl
-#define PANEL_MENU_MIDI_TRACK_OUTA_CHAN 4  // per track
+#define PANEL_MENU_MIDI_PROGRAM_B 3  // per track
+#define PANEL_MENU_MIDI_TRACK_OUTA_PORT 1  // per track
+#define PANEL_MENU_MIDI_TRACK_OUTB_PORT 4  // per tracl
+#define PANEL_MENU_MIDI_TRACK_OUTA_CHAN 2  // per track
 #define PANEL_MENU_MIDI_TRACK_OUTB_CHAN 5  // per track
 #define PANEL_MENU_MIDI_KEY_SPLIT 6  // per track
 #define PANEL_MENU_MIDI_KEY_VELOCITY 7  // per song

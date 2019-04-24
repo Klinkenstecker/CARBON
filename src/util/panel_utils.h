@@ -32,6 +32,11 @@ void panel_utils_onoff_str(char *tempstr, int val);
 // make a port name
 void panel_utils_port_str(char *tempstr, int port);
 
+// make cc names for known effect pedals
+void panel_utils_cc_names_upper(char *tempstr, int track, int cc);
+void panel_utils_cc_names_lower(char *tempstr, int track, int cc);
+void panel_utils_cc_names_value(char *tempstr, int track, int cc, int value);
+
 // make a channel name
 void panel_utils_channel_str(char *tempstr, int port, int channel);
 

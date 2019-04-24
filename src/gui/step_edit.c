@@ -284,10 +284,10 @@ void step_edit_adjust_note(int change, int shift) {
 void step_edit_adjust_velocity(int change, int shift) {
     sedits.edit_timeout = panel_menu_get_timeout();
     if(sedits.event_pos == STEP_EDIT_EVENT_POS_ALL) {
-        step_edit_adjust_step(change << 1, STEP_EDIT_ADJUST_VELO, 0, shift);
+        step_edit_adjust_step(change, STEP_EDIT_ADJUST_VELO, 0, shift);
     }
     else {
-        step_edit_adjust_step(change << 1, STEP_EDIT_ADJUST_VELO, 1, shift);
+        step_edit_adjust_step(change, STEP_EDIT_ADJUST_VELO, 1, shift);
     }
 }
 
@@ -440,7 +440,8 @@ void step_edit_adjust_step(int change, int mode, int single, int shift) {
                     }
                     // CC
                     else if(event.type == SONG_EVENT_CC) {
-                        event.data0 += change;
+                        //                        event.data0 += change;
+                        event.data0 = step_edit_find_next_valid_cc(event.data0, change);
                         // the new value would collide with another slot
                         if(step_edit_does_step_contain_event(SONG_EVENT_CC, event.data0) != -1) {
                             if(change > 0) {
@@ -467,8 +468,11 @@ void step_edit_adjust_step(int change, int mode, int single, int shift) {
                     }
                     // CC
                     else if(event.type == SONG_EVENT_CC) {
+                        if (shift) {
+                            change = change * 10;
+                        }
                         event.data1 = seq_utils_clamp(event.data1 + change, 0, 127);
-                        inhibit_preview = 1;  // user must retrigger edit to hear
+                        //                        inhibit_preview = 1;  // user must retrigger edit to hear
                     }
                     sedits.last_adjust_type = STEP_EDIT_ADJUST_VELO;
                     // put back modified event
@@ -605,10 +609,14 @@ void step_edit_update_display(void) {
                 }
                 break;
             case SONG_EVENT_CC:
-                gui_set_status_text_part(1, xpos, 4, "CC");
+                sprintf(tempstr, "CC ");
+                panel_utils_cc_names_upper(tempstr, sedits.track, event.data0);
+                gui_set_status_text_part(1, xpos, 4, tempstr);
                 sprintf(tempstr, "%-3d", event.data0);
+                panel_utils_cc_names_lower(tempstr, sedits.track, event.data0);
                 gui_set_status_text_part(2, xpos, 4, tempstr);
                 sprintf(tempstr, "%-3d", event.data1);
+                panel_utils_cc_names_value(tempstr, sedits.track, event.data0, event.data1);
                 gui_set_status_text_part(3, xpos, 4, tempstr);
                 break;
             default:  // blank slot
@@ -804,4 +812,123 @@ void step_edit_copy_marked_step(void) {
 
     step_edit_update_display();
     step_edit_play_step();
+}
+
+int step_edit_find_next_valid_cc(int actual, int change) {
+    int8_t port = song_get_midi_port_map(sedits.track, 0);
+    int8_t channel = song_get_midi_channel_map(sedits.track, 0);
+
+    // reduced cc numbers exists only for MIDI_PORT_DIN2
+    int cc_is_not_valid = (port == MIDI_PORT_DIN2_OUT);
+    int check_cc = actual;
+
+    do {
+        check_cc = check_cc + change;
+        
+        if (channel == 0) { //{ Dark World
+            switch(check_cc) {
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                case 21:
+                case 22:
+                case 23:
+                case 100:
+                case 102:
+                    cc_is_not_valid = 0;
+                    break;
+                default:
+                    cc_is_not_valid = 1;
+            } //}
+        } else if (channel == 1) { //{ Thermae
+            switch(check_cc) {
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                case 93:
+                case 100:
+                case 102:
+                    cc_is_not_valid = 0;
+                    break;
+                default:
+                    cc_is_not_valid = 1;
+            } //}
+        } else if (channel == 4) { //{ Ottobit
+            switch(check_cc) {
+                case 4:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                case 26:
+                case 27:
+                case 29:
+                case 31:
+                    cc_is_not_valid = 0;
+                    break;
+                default:
+                    cc_is_not_valid = 1;
+            } //}
+        } else if (channel == 5) { //{ Polymoon
+            switch(check_cc) {
+                case 4:
+                case 9:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                case 26:
+                case 27:
+                case 28:
+                case 29:
+                case 30:
+                case 31:
+                    cc_is_not_valid = 0;
+                    break;
+                default:
+                    cc_is_not_valid = 1;
+            } //}
+        } else {
+            cc_is_not_valid = 0;
+        }
+        if ((check_cc > 127) || (check_cc < 0)) {
+            check_cc = actual;
+            cc_is_not_valid = 0;
+        }
+    } while(cc_is_not_valid);
+    
+    if (check_cc > 127)
+        return 127;
+    if (check_cc < 0)
+        return 0;
+
+    return check_cc;
 }
