@@ -934,9 +934,8 @@ void song_set_midi_program(int track, int mapnum, int program) {
 }
 
 // resend the current the MIDI program for a track output
-void song_send_current_midi_pogram(int track, int mapnum) {
-    song_send_midi_program(int track, int mapnum,
-                           song.trkparam[track].midi_program[mapnum]);
+void song_send_current_midi_program(int track, int mapnum) {
+    song_set_midi_program(track, mapnum, song.trkparam[track].midi_program[mapnum]);
 }
 
 // get a MIDI port mapping for a track - returns -2 on error, -1 on unmapped

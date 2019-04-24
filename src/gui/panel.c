@@ -675,8 +675,8 @@ void panel_handle_seq_input(int ctrl, int val) {
                     int track;
                     for(track = 0; track < SEQ_NUM_TRACKS; track ++) {
                         if(seq_ctrl_get_track_select(track)) {
-                            for (mapnum == 0; mapnum <= SEQ_NUM_TRACK_OUTPUTS; mapnum++) {
-                                song_send_midi_program(track, mapnum);
+                            for (mapnum = 0; mapnum <= SEQ_NUM_TRACK_OUTPUTS; mapnum++) {
+                                song_send_current_midi_program(track, mapnum);
                             }
                         }
                     }
